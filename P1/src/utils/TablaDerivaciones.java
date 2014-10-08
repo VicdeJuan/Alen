@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package grammar;
+package utils;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;

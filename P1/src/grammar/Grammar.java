@@ -1,9 +1,12 @@
 package grammar;
 
 import java.util.ArrayList;
+
 import java.util.Random;
 
 import utils.RandomGenerator;
+
+import utils.TablaDerivaciones;
 
 public class Grammar {
 	private String terminals;
@@ -14,12 +17,14 @@ public class Grammar {
 	private ArrayList<String> derivatioRules;
 	private char Axiom;
 	private String word;
+	private TablaDerivaciones drawer;
 
 	public Grammar() {
 		derivatioRules = new ArrayList<String>();
 		setTerminals(new String());
 		noTerminals = new String();
 		word=null;
+		
 	}
 
 	/**
@@ -30,14 +35,30 @@ public class Grammar {
 	 *         following the rules of the grammar.
 	 */
 	
-	public String derivateAll(){
+	public String derivateAll(Boolean draw){
+		ArrayList <String>  list = new ArrayList<String>();
+		list.add(""+getAxiom());
+		drawer = new TablaDerivaciones(list);
+		String derivated = new String();
 		
-		for(int i=0; i< this.getMaxDepth();i++)
-			this.derivate();
+		for(int i=0; i< this.getMaxDepth();i++){
+			derivated = this.derivate(draw);
+			if (draw){
+				if(derivated != null){
+					for (int j = 0; j < derivated.length(); j++) {
+						list.add(String.valueOf(derivated.charAt(j)));
+					}
+					drawer.deriva(i, list);
+				}
+			}
+		}
+		
+		if (draw)
+			drawer.dibuja();
 		return this.getWord();
 	}
 
-	public void derivate() {
+	public String derivate(Boolean draw) {
 		String leftToConcat;
 		String rightToConcat = new String();
 		String derivated = new String();
@@ -57,6 +78,11 @@ public class Grammar {
 					rightToConcat = word.substring(i + 1);
 					derivated = this.getDerivation(word.charAt(i));
 					word = leftToConcat + derivated + rightToConcat;
+					if (draw){
+						return derivated;
+					}else {
+						return word;
+					}
 				}
 			}
 		} else {
@@ -67,10 +93,16 @@ public class Grammar {
 					rightToConcat = word.substring(i + 1);
 					derivated = this.getDerivation(word.charAt(i));
 					word = leftToConcat + derivated + rightToConcat;
+					if (draw){
+						return derivated;
+					}else {
+						return word;
+					}
 				}
+				
 			}
 		}
-		return;
+		return null;
 	}
 
 	/**
@@ -107,7 +139,7 @@ public class Grammar {
 					cont++;
 				}
 			}
-			return derivatioRules.get(RandomGenerator.randInt(0,cont));
+			return derivatioRules.get(RandomGenerator.randInt(0,cont)).substring(2);
 				
 		}
 	}

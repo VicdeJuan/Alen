@@ -13,7 +13,7 @@ public class Main {
 		DerivationMode derivationMode;
 		RightPartSelector rightPartSelector;
 		
-		/*String fileName = args[0];
+		String fileName = args[0];
 			
 		if(args[1] == "i"){
 			derivationMode=DerivationMode.Left;
@@ -27,15 +27,13 @@ public class Main {
 			rightPartSelector = RightPartSelector.Random;
 		} else{
 			rightPartSelector = RightPartSelector.Last;
-		}*/
-		String fileName="g2.txt";
-		derivationMode=DerivationMode.Left;
-		rightPartSelector = RightPartSelector.Random;
+		}
+		
 		
 		fileParser.ParseFile(fileName);
 		fileParser.getGrammar().setDerivationMode(derivationMode);
 		fileParser.getGrammar().setRightPartSelector(rightPartSelector);
-		System.out.println(fileParser.getGrammar().derivateAll());
+		System.out.println(fileParser.getGrammar().derivateAll(true));
 		
 	}
 	
