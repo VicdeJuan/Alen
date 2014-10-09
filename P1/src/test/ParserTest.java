@@ -1,9 +1,8 @@
 package test;
 
 import static org.junit.Assert.*;
-import grammar.DerivationMode;
 import grammar.Grammar;
-import grammar.RightPartSelector;
+
 
 import org.junit.Test;
 
@@ -21,11 +20,11 @@ public class ParserTest {
 		
 		Grammar grammar = fileParser.getGrammar();
 		
-		assertEquals(grammar.getAxiom(), 'S');
-		assertEquals(grammar.getNoTerminals(), "SAB");
-		assertEquals(grammar.getTerminals(),"ab");
-		assertEquals(grammar.getMaxDepth(), 4);
-		assertEquals(grammar.getDerivatioRules().size(), 4);
+		assertEquals('S',grammar.getAxiom());
+		assertEquals("SAB",grammar.getNoTerminals());
+		assertEquals("ab",grammar.getTerminals());
+		assertEquals(4, grammar.getMaxDepth());
+		assertEquals(4, grammar.getDerivatioRules().size());
 		
 	}
 

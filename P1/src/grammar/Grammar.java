@@ -2,8 +2,6 @@ package grammar;
 
 import java.util.ArrayList;
 
-import java.util.Random;
-
 import utils.RandomGenerator;
 
 import utils.TablaDerivaciones;
@@ -14,13 +12,13 @@ public class Grammar {
 	private DerivationMode derivationMode;
 	private RightPartSelector rightPartSelector;
 	private int maxDepth;
-	private ArrayList<String> derivatioRules;
+	private ArrayList<String> derivationRules;
 	private char Axiom;
 	private String word;
 	private TablaDerivaciones drawer;
 
 	public Grammar() {
-		derivatioRules = new ArrayList<String>();
+		derivationRules = new ArrayList<String>();
 		setTerminals(new String());
 		noTerminals = new String();
 		word=null;
@@ -100,38 +98,37 @@ public class Grammar {
 	/**
 	 * Gets one derivation from one no-terminal node.
 	 * 
-	 * @param no
-	 *            -terminal node.
+	 * @param no-terminal node.
 	 * @return derivation.
 	 */
 	private String getDerivation(Character NT) {
-		ArrayList<String> derivatioRules = getRules();
+		ArrayList<String> derivationRules = getRules();
 		ArrayList<Integer> positions = new ArrayList<Integer>();
 		int cont=0;
 		
 		if (getRightPartSelector() == RightPartSelector.First) {
-			for (int i = 0; i < derivatioRules.size(); i++) {
-				if (derivatioRules.get(i).charAt(0) == NT) {
-					return derivatioRules.get(i).substring(2);
+			for (int i = 0; i < derivationRules.size(); i++) {
+				if (derivationRules.get(i).charAt(0) == NT) {
+					return derivationRules.get(i).substring(2);
 				}
 			}
 			return "";
 		} else if (getRightPartSelector() == RightPartSelector.Last) {
-			for (int i = derivatioRules.size()-1; i >= 0; i--) {
-				if (derivatioRules.get(i).charAt(0) == NT) {
-					return derivatioRules.get(i).substring(2);
+			for (int i = derivationRules.size()-1; i >= 0; i--) {
+				if (derivationRules.get(i).charAt(0) == NT) {
+					return derivationRules.get(i).substring(2);
 				}
 			}
 			return "";
 
 		} else {
-			for (int i = 0; i < derivatioRules.size(); i++) {
-				if (derivatioRules.get(i).charAt(0) == NT) {
+			for (int i = 0; i < derivationRules.size()-1; i++) {
+				if (derivationRules.get(i).charAt(0) == NT) {
 					positions.add(i);
 					cont++;
 				}
 			}
-			return derivatioRules.get(RandomGenerator.randInt(0,cont)).substring(2);
+			return derivationRules.get(RandomGenerator.randInt(0,cont)).substring(2);
 				
 		}
 	}
@@ -178,11 +175,11 @@ public class Grammar {
 	}
 
 	public ArrayList<String> getRules() {
-		return derivatioRules;
+		return derivationRules;
 	}
 
 	public void setRules(ArrayList<String> rules) {
-		this.derivatioRules = rules;
+		this.derivationRules = rules;
 	}
 
 	public void setAxiom(char axiom) {
@@ -194,11 +191,11 @@ public class Grammar {
 	}
 	
 	public void setDerivatioRules(ArrayList<String> derivatioRules) {
-		this.derivatioRules = derivatioRules;
+		this.derivationRules = derivatioRules;
 	}
 	
 	public ArrayList<String> getDerivatioRules() {
-		return derivatioRules;
+		return derivationRules;
 	}
 	
 	public String getWord() {

@@ -8,6 +8,7 @@ package utils;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -82,6 +83,7 @@ import javax.swing.JPanel;
  * 
  * 
  */
+@SuppressWarnings("serial")
 public class TablaDerivaciones extends javax.swing.JFrame {
 
     private ArrayList <JPanel> listaPaneles;
