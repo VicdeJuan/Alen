@@ -24,6 +24,7 @@ public class Grammar {
 		setTerminals(new String());
 		noTerminals = new String();
 		word=null;
+		drawer = null;
 		
 	}
 
@@ -39,18 +40,9 @@ public class Grammar {
 		ArrayList <String>  list = new ArrayList<String>();
 		list.add(""+getAxiom());
 		drawer = new TablaDerivaciones(list);
-		String derivated = new String();
-		
+				
 		for(int i=0; i< this.getMaxDepth();i++){
-			derivated = this.derivate(draw);
-			if (draw){
-				if(derivated != null){
-					for (int j = 0; j < derivated.length(); j++) {
-						list.add(String.valueOf(derivated.charAt(j)));
-					}
-					drawer.deriva(i, list);
-				}
-			}
+			this.derivate(draw);
 		}
 		
 		if (draw)
@@ -58,53 +50,53 @@ public class Grammar {
 		return this.getWord();
 	}
 
-	public String derivate(Boolean draw) {
-		String leftToConcat;
-		String rightToConcat = new String();
-		String derivated = new String();
-		int index;
-		
-		
+	public String derivate(Boolean draw) {		
 		if(word==null){
 			word="";
 			word+= this.getAxiom();
 		}
 		
+		int index;
 		if (getDerivationMode() == DerivationMode.Left) {
 			for (int i = 0; i < word.length(); i++) {
 				index = getNoTerminals().indexOf(word.charAt(i));
-				if (index >= 0) {
-					leftToConcat = word.substring(0, i);
-					rightToConcat = word.substring(i + 1);
-					derivated = this.getDerivation(word.charAt(i));
-					word = leftToConcat + derivated + rightToConcat;
-					if (draw){
-						return derivated;
-					}else {
-						return word;
-					}
-				}
+				if (index >= 0)
+					return auxiliarDerivate(i,draw,index);
 			}
 		} else {
 			for (int i = word.length()-1; i >= 0; i--) {
 				index = getNoTerminals().indexOf(word.charAt(i));
-				if (index >= 0) {
-					leftToConcat = word.substring(0, i);
-					rightToConcat = word.substring(i + 1);
-					derivated = this.getDerivation(word.charAt(i));
-					word = leftToConcat + derivated + rightToConcat;
-					if (draw){
-						return derivated;
-					}else {
-						return word;
-					}
-				}
-				
+				if (index >= 0)
+					return auxiliarDerivate(i,draw,index);				
 			}
 		}
 		return null;
 	}
 
+	private String auxiliarDerivate(int i,Boolean draw, int index){
+		String leftToConcat;
+		String rightToConcat = new String();
+		String derivated = new String();
+		ArrayList <String>  list = new ArrayList<String>();
+		index = getNoTerminals().indexOf(word.charAt(i));
+		leftToConcat = word.substring(0, i);
+		rightToConcat = word.substring(i + 1);
+		derivated = this.getDerivation(word.charAt(i));
+		word = leftToConcat + derivated + rightToConcat;
+		if (draw){
+			if(derivated != null){
+				for (int j = 0; j < derivated.length(); j++) {
+					list.add(String.valueOf(derivated.charAt(j)));
+				}
+				drawer.deriva(i, list);
+			}
+		}
+		if (draw){
+			return derivated;
+		}else {
+			return word;
+		}
+	}
 	/**
 	 * Gets one derivation from one no-terminal node.
 	 * 
