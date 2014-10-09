@@ -29,8 +29,8 @@ public class Grammar {
 	/**
 	 * Derivates the given word just once.
 	 * 
-	 * @param word
-	 * @return null if word can't be derivated or the result of derivating
+	 * @param	draw boolean to indicate if we are testing or in main execution.
+	 * @return	null if word can't be derivated or the result of derivating
 	 *         following the rules of the grammar.
 	 */
 	
@@ -48,6 +48,11 @@ public class Grammar {
 		return this.getWord();
 	}
 
+	/**
+	 * One step in the derivation process.
+	 * @param	draw boolean to indicate if we are testing or in main execution.
+	 * @return	the derivation string if draw or the whole word if not draw.
+	 */
 	public String derivate(Boolean draw) {		
 		if(word==null){
 			word="";
@@ -59,24 +64,30 @@ public class Grammar {
 			for (int i = 0; i < word.length(); i++) {
 				index = getNoTerminals().indexOf(word.charAt(i));
 				if (index >= 0)
-					return auxiliarDerivate(i,draw,index);
+					return auxiliarDerivate(i,draw);
 			}
 		} else {
 			for (int i = word.length()-1; i >= 0; i--) {
 				index = getNoTerminals().indexOf(word.charAt(i));
 				if (index >= 0)
-					return auxiliarDerivate(i,draw,index);				
+					return auxiliarDerivate(i,draw);				
 			}
 		}
 		return null;
 	}
 
-	private String auxiliarDerivate(int i,Boolean draw, int index){
+	/**
+	 * Auxiliary function to concatenate the result of the derivation and
+	 * the word pre-derivated.
+	 * @param	i the index of the no-terminal character to be derivated.
+	 * @param	draw false if we are testing or true in main execution.
+	 * @return	the derivation string if draw or the whole word if not draw.
+	 */
+	private String auxiliarDerivate(int i,Boolean draw){
 		String leftToConcat;
 		String rightToConcat = new String();
 		String derivated = new String();
 		ArrayList <String>  list = new ArrayList<String>();
-		index = getNoTerminals().indexOf(word.charAt(i));
 		leftToConcat = word.substring(0, i);
 		rightToConcat = word.substring(i + 1);
 		derivated = this.getDerivation(word.charAt(i));
@@ -96,10 +107,11 @@ public class Grammar {
 		}
 	}
 	/**
-	 * Gets one derivation from one no-terminal node.
+	 * Gets one derivation from one no-terminal node following the rules given by
+	 * the grammar.
 	 * 
 	 * @param no-terminal node.
-	 * @return derivation.
+	 * @return the result of the derivation.
 	 */
 	private String getDerivation(Character NT) {
 		ArrayList<String> derivationRules = getRules();

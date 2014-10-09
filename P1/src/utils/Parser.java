@@ -18,6 +18,10 @@ public class Parser {
 		return grammar;
 	}
 	
+	/**
+	 * Fills grammar variable with the content of the file given parsed.
+	 * @param fileName	the name of the file to be parsed.
+	 */
 	public void ParseFile(String fileName){
 	try{
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
