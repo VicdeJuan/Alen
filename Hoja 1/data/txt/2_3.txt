@@ -1,0 +1,14 @@
+digraph finite_state_machine {
+    rankdir=LR;
+    size="8,5"
+
+    node [shape = doublecircle]; q2;
+    node [shape = point ]; init
+
+    node [shape = circle];
+    init -> q0
+    q0   -> q0 [ label = "{B,A,AB}" ];
+    q0    -> q1  [ label = "{B,λ,B}" ];
+    q1  -> q2 [ label = "{z,λ,z}" ];
+    q2  ->  q2 [ label = "{A,A,z}"];
+}
