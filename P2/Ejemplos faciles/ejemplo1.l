@@ -29,6 +29,7 @@ LOGICO {
 	return 12;
 }
 
+. {}
 
 
 
@@ -37,8 +38,11 @@ LOGICO {
 
 int main(){
 	int aux = yylex();
+	int i = 0;
 	while (aux != 0)
 	{
+		i++;
+		printf("%d",i);
 		switch (aux){
 			case 8:
 				printf("reconocido INICIO\n");
@@ -55,7 +59,11 @@ int main(){
 			case 12:
 				printf("reconocido LOGICO\n");
 				break;
+			case 13:
+				printf("NSNC\n");
+				break;
 			default:
+				printf("JAMAS!");
 				break;
 		}
 		aux = yylex();

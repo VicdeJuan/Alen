@@ -9,28 +9,9 @@
 
 %%
 
-INICIO { 
-	return 8;
+[1-9] {
+	return TOK_digit;
 }
-
-FIN { 
-	return 9;
-	}
-
-VECTOR { 
-	return 10;
-}
-
-ENTERO { 
-	return 11;
-}
-
-LOGICO { 
-	return 12;
-}
-
-
-
 
 %%
 

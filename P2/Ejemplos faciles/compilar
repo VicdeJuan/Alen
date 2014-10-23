@@ -1,2 +1,2 @@
 flex $1
-gcc -Wall lex.yy.c
+gcc -Wall -ggdb lex.yy.c

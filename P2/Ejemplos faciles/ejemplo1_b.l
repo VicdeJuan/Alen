@@ -10,24 +10,29 @@
 %%
 
 INICIO { 
-	printf("reconocido INICIO\n");
-	}
+	return 8;
+}
 
 FIN { 
-	printf("reconocido FIN\n");
+	return 9;
 	}
 
 VECTOR { 
-	printf("reconocido VECTOR\n");
-	}
+	return 10;
+}
 
 ENTERO { 
-	printf("reconocido ENTERO\n");
-	}
+	return 11;
+}
 
 LOGICO { 
-	printf("reconocido LOGICO\n");
-	}
+	return 12;
+}
+
+. {
+	return 13;
+}
+
 
 
 
@@ -35,11 +40,42 @@ LOGICO {
 
 
 int main(int argc,char ** argv){
-	if(argc >= 1)
+	if(argc >= 2){
 		yyin = fopen(argv[1],"r");
+	}
 	else return 0;
 
 	if (yyin != NULL)
-		return yylex();
+	{
+		int aux = yylex();
+		while (aux != 0)
+		{
+			switch (aux){
+				case 8:
+					printf("reconocido INICIO\n");
+					break;
+				case 9:
+					printf("reconocido FIN\n");
+					break;
+				case 10:
+					printf("reconocido VECTOR\n");
+					break;
+				case 11:
+					printf("reconocido ENTERO\n");
+					break;
+				case 12:
+					printf("reconocido LOGICO\n");
+					break;
+				case 13:
+					break;
+				default:
+					printf("JAMAS!");
+					break;
+			}
+			aux = yylex();
+		}
+		fclose(yyin);
+		return 0;
+	}
 	else return 0;
 }
