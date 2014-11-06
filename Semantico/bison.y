@@ -4,7 +4,7 @@
 
 void yyerror(char* s){
 
-	fprintf(stdout,"%s\n",(char *)yyerror);
+	fprintf(stdout,"error\n",s);
 	return;
 }
 %}
@@ -37,9 +37,7 @@ exp : exp '+' exp { $$ = $1 + $3; }
  ;
 
 cte: TOK_ENTERO { $$ = $1; } 
-	;
-
-cte: TOK_FLOAT { $$ = $1; } 
+	| TOK_FLOAT { $$ = $1; } 
 	;
 %%
 
