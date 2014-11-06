@@ -5,3 +5,7 @@ P1/.*
 Entrega
 *workspace
 *.pdf
+lex.yy.c
+y.tab.*
+y.output
+
