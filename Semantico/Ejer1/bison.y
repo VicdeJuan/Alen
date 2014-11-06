@@ -20,6 +20,10 @@ void yyerror(char* s){
 %type <float_val> exp
 %type <float_val> cte
 
+%left '+' '-'
+%left '*' '/'
+%right menos_unario
+
 %start exp_prn
 
 %%
@@ -31,7 +35,7 @@ exp : exp '+' exp { $$ = $1 + $3; }
  | exp '-' exp { $$ = $1 - $3; }
  | exp '*' exp { $$ = $1 * $3; }
  | exp '/' exp { $$ = $1 / $3; }
- | '-' exp { $$ = -$2; }
+ | '-' exp %prec menos_unario { $$ = -$2;  }
  | '(' exp ')'{ $$ = $2; }
  | cte { $$ = $1; }
  ;
