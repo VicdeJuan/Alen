@@ -1,0 +1,7 @@
+sensor choque 1 [0,2] 
+motor izquierdo 2 
+motor derecho 3 
+choque = 0 izquierdo(100,10) derecho(100,10) end 
+choque = 1 izquierdo(-100,10) derecho(-100,10) 
+izquierdo(-100,10) derecho(100,10) end 
+choque = 2 halt end 
