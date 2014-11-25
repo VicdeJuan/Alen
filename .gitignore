@@ -3,3 +3,7 @@ P1/.*
 .metadata
 .recommenders
 Entrega
+*.aux
+*.log
+*.pdf
+*.toc

@@ -1,6 +1,6 @@
 \documentclass[nochap]{apuntes}
 
-\title{Hoja 3 Autámatas y Lenguajes}
+\title{Hoja 3 Autómatas y Lenguajes}
 \author{Víctor de Juan Sanz}
 \date{2014}
 
@@ -23,17 +23,14 @@ Calcula los conjuntos primero y siguiente para cada símbolo no terminal.
 
 \solution
 
-\paragraph{A}
-\subparagraph{Primero:} λ
-\subparagraph{Siguiente: } {a,b}
+\subparagraph{Primero(A): } {c,a}
+\subparagraph{Siguiente(A) : } {\$,+}
 
-\paragraph{B}
-\subparagraph{Primero:} {c,λ}
-\subparagraph{Siguiente: } {+}
+\subparagraph{Primero (B):} {c,b}
+\subparagraph{Siguiente (B): } {\$,+}
 
-\paragraph{S}
-\subparagraph{Primero:} {λ}
-\subparagraph{Siguiente: } {λ}
+\subparagraph{Primero (S):} {a,b,c}
+\subparagraph{Siguiente (S): } {\$}
 \end{problem}
 
 
@@ -50,11 +47,11 @@ Calcula el cierre de la configuración inicial E’ ::= .E\$
 
 \solution
 \begin{align*}
-E' ::= .E\$\\
-E ::= .E + T\\
-E ::= .T\\
-T ::= .i\\
-T ::= .(E)
+E' &::= .E\$\\
+E &::= .E + T\\
+E &::= .T\\
+T &::= .i\\
+T &::= .(E)
 \end{align*}
 \end{problem}
 
@@ -71,16 +68,16 @@ E ::= (.L)\\
 L ::= .L,E\\
 L ::= .E\\
 E ::= .i\\
+E :: = .(L)
 \end{align*}
 \spart
 
 \begin{align*}
-E :: =(L.)\\
-L ::= L.,E
+L ::= (L.)
 \end{align*}
 \end{problem}
 
-
+	
 \begin{problem}[4]
 
 \ppart Dibuja el diagrama de estados del analizador LR(0) para dicha gramática.
@@ -90,7 +87,9 @@ SLR(1).
 \solution
 
 \spart 
-%includeimg
+\includegraphics[scale=0.1]{peque.jpg}
+
+
 \spart 
 
 \begin{tabular}{c||c|c|c|c|c|c}
@@ -108,7 +107,7 @@ $S_6$ &r1 &r1 &r1 &r1 &r1 &r1
 
 Tampoco sería LR(1) debido a la regla λ, que hace imposible distinguir cuando reducir y cuándo desplazar.
 \end{problem}
-
+\newpage
 \begin{problem}[5]
 \ppart Dibuja el diagrama de estados del analizador LR(0) para dicha gramática.
 \ppart Calcula la tabla de análisis para el analizador LR(0).
@@ -118,7 +117,9 @@ SLR(1).
 \solution
 
 \spart
-%includeimg
+\includegraphics[scale=0.2]{grande.jpg}
+
+
 \spart
 
 \begin{tabular}{c||c|c|c|c|c|c|c|c|c|c}
@@ -142,6 +143,55 @@ $S_{11}$ & r11 & r11 & r11 & r11 & r11 & r11 & r11 & r11 & r11 & r11 \\\hline
 Esta gramática no es LR(0) porque presenta conflictos. 
 
 Tampoco sería LR(1) debido a la regla λ, que hace imposible distinguir cuando reducir y cuándo desplazar.
+
+\end{problem}
+
+\begin{problem}[6]
+
+\solution
+\begin{minipage}{0.3\textwidth}
+\ppart
+\begin{align*}
+P(X)&=\{e,g\}\\
+P(Y)&=\{g\}\\
+P(Z)&=\{h\}\\
+\end{align*}
+
+\begin{align*}
+S(X)&=\{\$\}\\
+S(Y)&=\{\$,e,h\}\\
+S(Z)&=\{\$,f\}\\
+\end{align*}
+\end{minipage}
+
+\begin{minipage}{0.3\textwidth}
+\ppart
+\begin{align*}
+P(X)&=\{c,i,f\}\\
+P(Y)&=\{i,f\}\\
+P(Q)&=\{f\}\\
+\end{align*}
+\begin{align*}
+S(X)&=\{\$,i,f\}\\
+S(Y)&=\{\$,i,f\}\\
+S(Q)&=\{\$,i,f\}\\
+\end{align*}
+\end{minipage}
+
+\begin{minipage}{0.3\textwidth}
+\ppart
+
+\begin{align*}
+P(X)&=\{",",.,e\}\\
+P(A)&=\{0,1,",",.,e\}\\
+P(B)&=\{0,1,",",.,e\}\\
+\end{align*}
+\begin{align*}
+S(X)&=\{\$,0,1\}\\
+S(A)&=\{\$,\}\\
+S(B)&=\{\$,",",.,e\}\\
+\end{align*}
+\end{minipage}
 
 \end{problem}
 
