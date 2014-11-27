@@ -7,7 +7,7 @@
 
 void yyerror(char* s){
 
-	fprintf(stdout,"%s\n\n",(char *)yyerror);
+	fprintf(stdout,"%s\n\n",(char *)s);
 	exit(-1);
 }
 
@@ -72,6 +72,8 @@ sensorDecl : sensor name port rank /* Insertar en tabla símbolos */{
 		sim->max = $4.max;
 		strcpy(sim->key,$2.key);
 		sim->port = $3.value;
+		add_symbol(tabla,sim,1);
+
 	}
 }
 ;
@@ -88,6 +90,8 @@ motorDecl : motor name port /* Insertar en tabla símbolos y comprobar puerto va
 		sim->max = 0;
 		strcpy(sim->key,$2.key);
 		sim->port = $3.value;
+		add_symbol(tabla,sim,1);
+
 	}
 
 }
@@ -113,8 +117,9 @@ action : sensorAction motorActions end
 
 sensorAction : name cmpSymbol value { /* Buscar en tabla símbolo name y value dentro de range*/
 	symbol * sen = search_symbol(tabla,$1.key,1);
-	if (!sen)
+	if (!sen){
 		yyerror("Sensor no definido previamente");
+	}
 	if (!(($3.value <= sen->max) && ($3.value >= sen->min)))
 		yyerror("Valor fuera de rango");
 }
@@ -147,7 +152,7 @@ motorAction : name '('power ',' tiempo')' {
 	}
 ;
 
-power : num { if (!(($1.value <= 100) && ($1.value >= 100))) yyerror("Tiempo fuera de rango"); $$.value = $1.value; }
+power : num { if (!(($1.value <= 100) && ($1.value >= -100))) yyerror("Tiempo fuera de rango"); $$.value = $1.value; }
 ;
 
 tiempo : num { if ($1.value <= 0) yyerror("Tiempos positivos por favor"); $$.value = $1.value; }/* tiempo ≥ 0*/
