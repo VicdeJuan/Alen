@@ -7,3 +7,10 @@ Entrega
 *.log
 *.pdf
 *.toc
+*workspace
+*.pdf
+lex.yy.c
+y.tab.*
+y.output
+prueba
+a.*
