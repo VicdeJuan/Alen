@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include "valor.h"
 #include "y.tab.h"
 
 %}

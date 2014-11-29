@@ -4,6 +4,7 @@
 typedef struct {
 	int value;
 	int tipo;
+	int var;
 }val_struct;
 
 #endif
